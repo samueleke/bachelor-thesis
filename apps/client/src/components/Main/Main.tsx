@@ -19,7 +19,6 @@ const Main: FC = () => {
         }
     }
 
-    console.log(import.meta.env.VITE_PUBLIC_GOOGLE_API_TOKEN);
 
     return (
         <Container maxWidth="xl">

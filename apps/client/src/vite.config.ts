@@ -19,7 +19,7 @@ export default defineConfig({
   plugins: [
     react(),
     viteTsConfigPaths({
-      root: '../../',
+      root: '../../client',
     }),
   ],
 

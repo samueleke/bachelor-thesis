@@ -11,12 +11,8 @@ import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
-import { createTheme, ThemeProvider } from '@mui/material/styles';
-import {
-    GoogleLogin,
-    GoogleOAuthProvider,
-    CredentialResponse,
-} from '@react-oauth/google';
+// import { createTheme, ThemeProvider } from '@mui/material/styles';
+import { GoogleLogin, CredentialResponse } from '@react-oauth/google';
 import {
     FormControl,
     InputLabel,
@@ -55,7 +51,6 @@ export default function Login() {
     const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
         setFormData({ ...formData, [event.target.name]: event.target.value });
     };
-
 
     const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
