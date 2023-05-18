@@ -1,0 +1,64 @@
+@import url('https://fonts.googleapis.com/css2?family=Courgette&display=swap');
+
+:root {
+    --primary-color: #A036F3;
+    --dark-color: #222222;
+    --light-color: #BEC5E6;
+}
+
+.navbar_container {
+    width: 100%;
+}
+
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.navbar ul {
+    display: flex;
+    list-style: none;
+    margin: 0;
+    padding: 0.7rem 1rem;
+    gap: 1rem;
+}
+
+.navbar-heading {
+    margin: 0;
+    padding-left: 2rem;
+    text-align: left;
+    color: var(--primary-color);
+    font-family: 'Courgette' !important;
+}
+
+.btn {
+    color: var(--primary-color);
+    font-size: 2rem;
+    border-radius: 20px;
+}
+
+.btn.login {
+    border: 2px solid transparent;
+}
+
+.btn.signup {
+    border: 2px solid transparent;
+}
+
+
+.btn.login:hover {
+    border: 2px solid var(--primary-color);
+}
+
+
+.btn.signup:hover {
+    background-color: var(--primary-color);
+    color: #fff;
+}
+
+.profile {
+    display: flex;
+    justify-content: space-between;
+    gap: 1rem;
+}

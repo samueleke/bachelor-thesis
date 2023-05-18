@@ -5,14 +5,35 @@
     "default": {
       "runner": "nx-cloud",
       "options": {
-        "cacheableOperations": [
-          "build",
-          "lint",
-          "test",
-          "e2e"
-        ],
+        "cacheableOperations": ["build", "lint", "test", "e2e"],
         "accessToken": "ZGM0MGI1YjMtYjU4MS00NTY0LTg3NmYtODY4NGY4YTQxMzQwfHJlYWQtd3JpdGU="
       }
+    }
+  },
+  "generators": {
+    "@nx/react": {
+      "application": {
+        "style": "css",
+        "linter": "eslint",
+        "bundler": "vite",
+        "babel": true
+      },
+      "component": {
+        "style": "css"
+      },
+      "library": {
+        "style": "css",
+        "linter": "eslint"
+      }
+    }
+  },
+  "targetDefaults": {
+    "lint": {
+      "inputs": [
+        "default",
+        "{workspaceRoot}/.eslintrc.json",
+        "{workspaceRoot}/.eslintignore"
+      ]
     }
   }
 }
