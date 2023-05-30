@@ -1,19 +1,14 @@
 {
     "extends": "../../tsconfig.base.json",
+    "rootDir": "./src",
     "files": [],
-    "include": [],
-    "references": [
-        {
-            "path": "./tsconfig.app.json"
-        },
-        {
-            "path": "./tsconfig.spec.json"
-        }
-    ],
+    "include": ["./src/*.d.ts"],
     "compilerOptions": {
         "esModuleInterop": true,
         "forceConsistentCasingInFileNames": true,
-        "strict": true
+        "strict": true,
+        "module": "esnext",
+        "target": "es2017",
     },
     "ts-node": {
         "esm": true,
