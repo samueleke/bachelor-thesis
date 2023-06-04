@@ -1,6 +1,7 @@
 import { NextFunction, Request, Response } from "express";
 import { Role } from "../utils/types";
-import { APIError } from "shared/errors";
+// eslint-disable-next-line @nx/enforce-module-boundaries
+import {APIError} from "../../../../packages/shared/errors";
 
 export const roleMiddleware = (...roles: Role[]) =>
     (req: Request, res: Response, next: NextFunction) => {

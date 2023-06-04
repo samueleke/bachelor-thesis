@@ -1,5 +1,5 @@
 import { model, Schema, Types } from "mongoose";
-import bcrypt from "bcrypt";
+import bcrypt from "bcryptjs";
 
 export type TTeacher = {
     id: Types.ObjectId;

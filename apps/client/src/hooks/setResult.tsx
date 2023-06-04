@@ -17,7 +17,8 @@ export const pushAnswer =
     };
 
 export const updateResult =
-    (index : {trace: number, checked: boolean}) => async (dispatch: Dispatch<Action.ResultAction>) => {
+    (index: { trace: number; checked: boolean }) =>
+    async (dispatch: Dispatch<Action.ResultAction>) => {
         try {
             dispatch(Action.updateResultAction(index));
         } catch (error) {
@@ -48,14 +49,19 @@ export const signIn =
         try {
             //log in user & navigate to home page
             const { data } = await API.signIN(
-                `${import.meta.env.VITE_SERVER_HOSTNAME}/user/signin`,
+                `${import.meta.env.VITE_SERVER_HOSTNAME}/login`,
                 formData,
             );
             dispatch(Auth.startAuth(data));
 
             navigate('/');
-        } catch (error) {
+        } catch (error: any) {
             console.log(error);
+
+            const err = error as Error;
+
+            // // console.log(err.message);
+            dispatch(Auth.setError(err.message));
         }
     };
 export const signUp =
@@ -64,14 +70,15 @@ export const signUp =
         try {
             //sign up user
             const { data } = await API.signUP(
-                `${import.meta.env.VITE_SERVER_HOSTNAME}/user/signup`,
+                `${import.meta.env.VITE_SERVER_HOSTNAME}/signup`,
                 formData,
             );
             dispatch(Auth.startAuth(data));
             navigate('/');
         } catch (error) {
-            const err = error as APIErrorType;
+            console.log(error);
 
-            dispatch(Auth.setError(err));
+            const err = error as Error;
+            dispatch(Auth.setError(err.message));
         }
     };

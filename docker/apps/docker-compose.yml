@@ -1,0 +1,33 @@
+version: '3.7'
+services:
+  server:
+    extends:
+      file: ../../docker-compose.yml
+      service: nx-app
+    env_file:
+      - ../../apps/server/.env
+    environment:
+      MONGO_URI: ${ATLAS_URI}
+    command: npm start -w server
+    ports:
+      - "5173:5000"
+    volumes:
+      - ../../apps/server:/home/node/allamvizsga/apps/server
+      - ../../packages/shared:/home/node/allamvizsga/packages/shared
+
+  client:
+    extends:
+      file: ../../docker-compose.yml
+      service: nx-app
+    env_file:
+      - ../../apps/client/.env
+    command: npm run dev -w client
+    ports:
+      - "5000:5173"
+    volumes:
+      - ../../apps/client:/home/node/allamvizsga/apps/client
+      - ../../packages/shared:/home/node/allamvizsga/packages/shared
+
+
+volumes:
+  mono-node-modules:

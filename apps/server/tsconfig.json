@@ -1,17 +1,12 @@
 {
     "extends": "../../tsconfig.base.json",
-    "rootDir": "./src",
-    "files": [],
-    "include": ["./src/*.d.ts"],
     "compilerOptions": {
-        "esModuleInterop": true,
-        "forceConsistentCasingInFileNames": true,
-        "strict": true,
-        "module": "esnext",
-        "target": "es2017",
+        "outDir": "./dist",
+        "baseUrl": "./",
+        "paths": {
+            "shared/*": ["../../packages/shared/*"]
+        }
     },
-    "ts-node": {
-        "esm": true,
-        "experimentalSpecifierResolution": "node"
-    }
+    "include": ["src/**/*.ts", "src/**/*.d.ts", "../../packages/**/*.ts"],
+    "exclude": ["./dist"]
 }

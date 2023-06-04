@@ -34,7 +34,7 @@ export const authReducer = createSlice({
                 error: null,
             };
         },
-        setError: (state, action: PayloadAction<APIErrorType>) => {
+        setError: (state, action: PayloadAction<string>) => {
             return {
                 ...state,
                 error: action.payload,

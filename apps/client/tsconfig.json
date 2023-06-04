@@ -3,6 +3,7 @@
         "jsx": "react",
         "outDir": "./dist/out-tsc",
         "rootDir": "./src",
+        "baseUrl": ".",
         "types": [
             "vitest/globals",
             "vitest/importMeta",
@@ -15,7 +16,10 @@
         "lib": ["es7", "dom"],
         "noImplicitAny": true,
         "noImplicitThis": true,
-        "strictNullChecks": true
+        "strictNullChecks": true,
+        "paths": {
+            "shared/*": ["../../packages/shared/*"]
+        }
     },
     "files": [
         "../../node_modules/@nx/react/typings/cssmodule.d.ts",

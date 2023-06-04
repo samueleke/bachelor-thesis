@@ -1,3 +1,5 @@
+import { Role } from "./utils/types";
+
 export { }
 
 declare global {
@@ -6,7 +8,7 @@ declare global {
             user?: {
                 id: string;
                 email: string;
-                role: 'teacher' | 'student' | 'admin';
+                role: Role;
             }
         }
     }

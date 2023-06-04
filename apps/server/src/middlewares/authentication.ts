@@ -2,7 +2,8 @@ import { Request } from 'express';
 import passport from 'passport';
 import { ExtractJwt, Strategy as JWTstrategy } from 'passport-jwt';
 import envResult from '../utils/env';
-import { APIError } from 'shared/errors';
+// eslint-disable-next-line @nx/enforce-module-boundaries
+import { APIError } from '../../../../packages/shared/errors';
 
 export const authMiddleware = () => (req: Request) => {
     const authorization = req.headers.authorization;
@@ -14,7 +15,7 @@ export const authMiddleware = () => (req: Request) => {
     return passport.authenticate('jwt', { session: false });
 };
 
-//register JWT strategy
+// register JWT strategy
 passport.use(
     new JWTstrategy(
         {

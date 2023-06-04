@@ -1,0 +1,11 @@
+version: '3.7'
+
+services:
+  nx-app:
+    restart: always
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - ./:/home/node/allamvizsga/
+      - /home/node/allamvizsga/apps/node_modules

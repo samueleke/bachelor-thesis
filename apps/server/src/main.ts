@@ -1,15 +1,26 @@
+/* eslint-disable @nx/enforce-module-boundaries */
 import express, { NextFunction, Request, Response } from 'express';
+import cors from 'cors';
 import env from './utils/env';
 import mongoose from 'mongoose';
-import { APIError } from 'shared/errors'
 import { AsyncRouter } from 'express-async-router';
 import { HttpMethod, Route } from './utils/types';
 import { databaseConnection } from './dbConnect';
 import { authMiddleware } from './middlewares/authentication';
 import { roleMiddleware } from './middlewares/authorization';
 import { validateSchema } from './middlewares/validateSchema';
+import { APIError } from '../../../packages/shared/errors';
+import { signinRoutes } from './signin/signinRoute';
+import { questionRoutes } from './question/questionRoute';
+import { studentRoutes } from './users/student/studentRoute';
 
 const app = express();
+
+app.use(cors({
+  origin: env.CLIENT_URL,
+}))
+app.use(express.json());
+
 
 const router = AsyncRouter({
   sender: (req: Request, res: Response, value: string) => {
@@ -18,7 +29,11 @@ const router = AsyncRouter({
 });
 
 const getRoutes = (): Route[] => {
-  return []
+  return [
+    ...signinRoutes(),
+    ...questionRoutes(),
+    ...studentRoutes(),
+  ]
 }
 
 const buildAPIRoutes = (getRoutes: () => Route[]) => {
@@ -54,7 +69,7 @@ const routes = buildAPIRoutes(getRoutes);
 app.use(routes);
 
 //error handler middleware
-app.use((err: any, _req: Request, res: Response) => {
+app.use((err: any, _req: Request, res: Response, next: NextFunction) => {
   if (err instanceof mongoose.Error.ValidationError) {
     return res.status(400).send((err as any).errors);
   }

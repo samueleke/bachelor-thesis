@@ -32,8 +32,6 @@ export function flagResult(totalPoints: number, earnPoints: number) {
     return (totalPoints * 50) / 100 < earnPoints;
 }
 
-
-
 export async function getServerData<T>(
     url: string,
     callback?: CallbackFunction<T>,

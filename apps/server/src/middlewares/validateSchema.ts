@@ -1,11 +1,14 @@
-import { NextFunction, Request, Response } from 'express';
-import { APIError } from 'shared/errors';
+import { NextFunction, Response } from 'express';
+// eslint-disable-next-line @nx/enforce-module-boundaries
+import { APIError } from '../../../../packages/shared/errors';
 import { z } from 'zod';
+import { IRequest } from '../utils/types';
 
 export const validateSchema =
-    (schema: z.ZodObject<any, any>) =>
-        (req: Request, res: Response, next: NextFunction) => {
+    (schema: z.ZodObject<any, any> | z.ZodEffects<any,any>) =>
+        (req: IRequest, res: Response, next: NextFunction) => {
             let reqField = req.body;
+
             const parsedParams = schema.safeParse(reqField);
 
             if (parsedParams.success) {

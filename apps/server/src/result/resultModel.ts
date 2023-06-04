@@ -1,4 +1,4 @@
-import mongoose, { Document, Schema, Types } from "mongoose";
+import mongoose, { Document, Schema } from "mongoose";
 import { TStudent } from "../users/student/studentModel";
 import { IAnswer } from "../answer/answerModel";
 import { IQuestion } from "../question/questionModel";

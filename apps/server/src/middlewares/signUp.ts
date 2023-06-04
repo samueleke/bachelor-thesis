@@ -1,8 +1,9 @@
 import passport from 'passport';
 import { Strategy as LocalStrategy } from 'passport-local';
 import { IRequest, RegisterDTO } from '../utils/types';
-import { getUserByEmail } from '../userProvider';
-import { APIError } from 'shared/errors';
+// eslint-disable-next-line @nx/enforce-module-boundaries
+import { APIError } from '../../../../packages/shared/errors';
+import { getUserByEmail } from '../users/userProvider';
 
 passport.use(
     'signup',
@@ -19,7 +20,6 @@ passport.use(
                     password,
                     firstName: req.body.firstName,
                     lastName: req.body.lastName,
-                    address: req.body.address,
                 };
                 const userExists = await getUserByEmail(email);
 

@@ -1,0 +1,24 @@
+version: '3.7'
+services:
+  mongodb_allamvizsga:
+    image: mongo:latest
+    container_name: mongodb
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=admin
+      - MONGO_INITDB_ROOT_PASSWORD=123456
+    ports:
+      - 27018:27017
+    volumes:
+      - ./data:/data/db
+
+  mongodb_seed:
+    image: pkosiec/mongo-seeding:latest
+    container_name: mongodb_seed
+    environment:
+      DB_URI: mongodb://${USER}:${PASSWORD}@mongodb/server
+      DROP_DATABASE: true
+    volumes:
+      - ./data/users:/data/users
+
+volumes:
+  data:

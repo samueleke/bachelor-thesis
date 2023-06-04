@@ -2,7 +2,9 @@ import passport from "passport";
 import { Strategy as LocalStrategy } from "passport-local";
 
 import { comparePassword } from "../utils/hashPassword";
-import { getUserByEmail } from "../userProvider";
+// eslint-disable-next-line @nx/enforce-module-boundaries
+import { APIError } from "../../../../packages/shared/errors";
+import { getUserByEmail } from "../users/userProvider";
 
 passport.use(
     "login",
@@ -12,13 +14,20 @@ passport.use(
             try {
                 const user = await getUserByEmail(email);
                 if (!user) {
-                    return done(null, false, { message: "User not found" });
+                    return done(
+                        new APIError(404, {
+                            msg: "User not found!"
+                        }), false);
                 }
                 const validate = await comparePassword(password, user.password);
                 if (!validate) {
-                    return done(null, false, { message: "Wrong password" });
+                    return done(
+                        new APIError(403, {
+                            msg: "Wrong password!"
+                        })
+                        , false);
                 }
-                return done(null, user, { message: "Logged in successfully" });
+                return done(null, user);
             } catch (error) {
                 return done(error);
             }

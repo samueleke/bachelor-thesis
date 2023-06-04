@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 import { FilterQuery, ModelPopulationOptions } from "../utils/types";
-import { APIError } from "shared/errors";
+// eslint-disable-next-line @nx/enforce-module-boundaries
+import {APIError} from "../../../../packages/shared/errors";
 
 export const queryQuestion = async <T>(filter: FilterQuery<T>, model: mongoose.Model<T>) => {
     if (!mongoose.Types.ObjectId.isValid(filter._id.toString()))
@@ -12,7 +13,10 @@ export const queryQuestion = async <T>(filter: FilterQuery<T>, model: mongoose.M
 
         return entity;
     } catch (error) {
-        throw new APIError(500, { message: error.message })
+        console.log(error);
+        if (error instanceof Error) {
+            throw new APIError(500, { message: error.message })
+        }
     }
 
 }
@@ -22,8 +26,7 @@ export const queryModel = async <T>(model: mongoose.Model<T>, option?: ModelPopu
     try {
         // Retrieve all entities from the specified model and populate the specified option (if provided)
         const query = model.find({})
-        if (option)
-        {
+        if (option) {
             query.populate(option as ModelPopulationOptions);
         }
 
@@ -31,6 +34,22 @@ export const queryModel = async <T>(model: mongoose.Model<T>, option?: ModelPopu
         return entities;
     } catch (error) {
         console.log(error);
-        throw new APIError(500, { message: error.message })
+        if (error instanceof Error) {
+            throw new APIError(500, { message: error.message })
+        }
+    }
+}
+
+export const deleteSelectedQuestions = async <T>(filter: FilterQuery<T>, model: mongoose.Model<T>) => {
+    try {
+        return await model.deleteMany(filter);
+    } catch (error) {
+        console.log(error);
+        if (error instanceof mongoose.Error.CastError) {
+            throw new APIError(400, { message: 'Invalid filter parameters', filter })
+        }
+        if (error instanceof Error) {
+            throw new APIError(500, { message: error.message })
+        }
     }
 }
