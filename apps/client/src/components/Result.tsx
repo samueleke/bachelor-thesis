@@ -1,18 +1,13 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { answers } from '../database/data';
-import {
-    attempts_number,
-    earnPoints_number,
-    flagResult,
-} from '../helper/helper';
-import { usePublishResult } from '../hooks/setResult';
-import { resetAllAction } from '../redux/question_reducer';
-import { resetResultAction } from '../redux/result_reducer';
+import { attemptsNumber, earnedPoints, flagResult } from '../utils/helper';
+import { resetAllAction } from '../redux/question/question_reducer';
+import { resetResultAction } from '../redux/result/result_reducer';
 import '../styles/Result.css';
 import ResultTable from './ResultTable';
 import { RootState } from '../redux/store';
+import { publishResult } from '../utils/serverData';
 
 export default function Result() {
     const dispatch = useDispatch();
@@ -23,11 +18,11 @@ export default function Result() {
     } = useSelector((state: RootState) => state);
 
     const totalPoints = queue.length * 10;
-    const attempts = attempts_number(result);
-    const earnPoints = earnPoints_number(result, answers, 10);
+    const attempts = attemptsNumber(result);
+    const earnPoints = earnedPoints(result, answers, 10);
     const flag = flagResult(totalPoints, earnPoints);
 
-    usePublishResult({
+    publishResult({
         result,
         username: userId,
         attempts,

@@ -1,5 +1,5 @@
 {
-  "name": "client",
+  "name": "@thesis/client",
   "private": true,
   "version": "1.0.0",
   "description": "",
@@ -11,7 +11,7 @@
     "preview": "vite preview"
   },
   "dependecies": {
-    "shared": "*",
+    "@thesis/shared": "*",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-router-dom": "6.8.1",
@@ -42,7 +42,8 @@
     "vite": "^4.3.4",
     "vite-plugin-eslint": "^1.8.1",
     "vite-tsconfig-paths": "^4.0.2",
-    "vitest": "^0.31.0"
+    "vitest": "^0.31.0",
+    "shared": "*"
   },
   "keywords": [],
   "author": "Eke Samuel",

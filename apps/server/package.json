@@ -1,5 +1,5 @@
 {
-    "name": "server",
+    "name": "@thesis/server",
     "version": "1.0.0",
     "description": "",
     "main": "./src/main.ts",
@@ -9,6 +9,7 @@
         "start": "nodemon -L --exec ts-node-transpile-only -r tsconfig-paths/register -r dotenv/config ./src/main.ts"
     },
     "dependencies": {
+        "@thesis/shared": "*",
         "bcryptjs": "^2.4.3",
         "cors": "^2.8.5",
         "dotenv": "^16.0.3",
@@ -19,8 +20,7 @@
         "nodemon": "^2.0.21",
         "passport": "^0.6.0",
         "passport-jwt": "^4.0.1",
-        "passport-local": "^1.0.0",
-        "shared": "*"
+        "passport-local": "^1.0.0"
     },
     "devDependencies": {
         "@types/bcryptjs": "^2.4.2",

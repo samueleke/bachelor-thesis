@@ -15,16 +15,16 @@ passport.use(
                 const user = await getUserByEmail(email);
                 if (!user) {
                     return done(
-                        new APIError(404, {
-                            msg: "User not found!"
-                        }), false);
+                        new APIError(404,
+                            "User not found!"
+                        ), false);
                 }
                 const validate = await comparePassword(password, user.password);
                 if (!validate) {
                     return done(
-                        new APIError(403, {
-                            msg: "Wrong password!"
-                        })
+                        new APIError(403,
+                            "Wrong password!"
+                        )
                         , false);
                 }
                 return done(null, user);

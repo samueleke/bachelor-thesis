@@ -5,7 +5,7 @@ import './Navbar.css';
 import { Link, Outlet, useNavigate, useLocation } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 
-import * as Action from '../../redux/auth_reducer';
+import * as Action from '../../redux/auth/auth_reducer';
 import jwtDecode, { JwtPayload } from 'jwt-decode';
 import { User } from '../../types';
 

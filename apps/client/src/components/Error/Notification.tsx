@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Snackbar, IconButton, Alert } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 
 export type NotificationProps = {
-    message: string;
+    message: string | null;
     type?: 'error' | 'success' | 'warning' | 'info';
     onClose?: () => void;
-}
+};
 
 const Notification: React.FC<NotificationProps> = ({
     message,
@@ -14,6 +14,13 @@ const Notification: React.FC<NotificationProps> = ({
     onClose,
 }) => {
     const [isVisible, setIsVisible] = useState(true);
+
+    useEffect(() => {
+        // Reset visibility when message changes
+        if (message) {
+            setIsVisible(true);
+        }
+    }, [message]);
 
     const handleClose = () => {
         onClose && onClose();
@@ -38,7 +45,7 @@ const Notification: React.FC<NotificationProps> = ({
     return (
         <Snackbar
             open={isVisible}
-            autoHideDuration={6000}
+            autoHideDuration={10000}
             onClose={handleClose}
         >
             <Alert

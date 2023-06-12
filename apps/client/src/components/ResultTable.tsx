@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
-import { getServerData } from '../helper/helper';
 import { TableData } from '../types';
+import { getServerData } from '../utils/serverData';
 
 export default function ResultTable() {
     const [data, setData] = useState<TableData[]>([]);

@@ -1,11 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { useFetchQuestion } from '../hooks/FetchQuestions';
+import { useFetchQuestion } from '../hooks/useFetchQuestions';
 import { useDispatch, useSelector } from 'react-redux';
-import { updateResult } from '../hooks/setResult';
 import { RootState } from '../redux/store';
 import { Question, QuestionProps } from '../types';
 import Notification from './Error/Notification';
-import { updateResultAction } from '../redux/result_reducer';
+import { updateResultAction } from '../redux/result/result_reducer';
 
 export default function Questions({ onChecked }: QuestionProps) {
     const [errorMessage, setErrorMessage] = useState<string | null>(null);
@@ -31,7 +30,7 @@ export default function Questions({ onChecked }: QuestionProps) {
             onChecked(i);
             setChecked(i);
             dispatch(updateResultAction({ trace, checked: false }));
-        }else{
+        } else {
             setErrorMessage('Please select an option');
         }
     }
@@ -49,7 +48,13 @@ export default function Questions({ onChecked }: QuestionProps) {
     }
     return (
         <div className="questions">
-            {errorMessage && (<Notification message={errorMessage} type='error' onClose={()=> setErrorMessage(null)}/>)}
+            {errorMessage && (
+                <Notification
+                    message={errorMessage}
+                    type="error"
+                    onClose={() => setErrorMessage(null)}
+                />
+            )}
             <h2 className="text-light">{questions?.question}</h2>
             <ul key={questions?.id}>
                 {questions?.options.map(

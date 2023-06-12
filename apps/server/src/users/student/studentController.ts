@@ -16,6 +16,7 @@ export const registerStudent = async (req: IRequest<RegisterDTO>) => {
             firstName: req.body.firstName,
             lastName: req.body.lastName,
         };
+        console.log(userModel);
 
         const newUser = await createUser(userModel, Student);
 

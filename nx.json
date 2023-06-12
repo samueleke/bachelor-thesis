@@ -34,6 +34,9 @@
         "{workspaceRoot}/.eslintrc.json",
         "{workspaceRoot}/.eslintignore"
       ]
+    },
+    "build":{
+      "dependsOn": ["^build"]
     }
   }
 }

@@ -1,15 +1,15 @@
 import React from 'react';
-import '../styles/App.css';
+import './App.css';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
-import Main from './Main/Main';
-import Quiz from './Quiz';
-import Result from './Result';
-import Login from './Login/Login';
-import Signup from './Signup/Signup';
-import RootLayout from './RootLayout';
+import Main from './pages/Main/Main';
+import Quiz from './components/Quiz';
+import Result from './components/Result';
+import Login from './pages/Login/Login';
+import Signup from './pages/Register/Register';
+import RootLayout from './pages/RootLayout';
 import { GoogleOAuthProvider } from '@react-oauth/google';
-import { ProtectedRoute } from './ProtectedRoute';
+import { ProtectedRoute } from './components/ProtectedRoute';
 
 const router = createBrowserRouter([
     {

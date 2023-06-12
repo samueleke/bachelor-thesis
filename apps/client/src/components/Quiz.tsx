@@ -1,13 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import Questions from './Questions';
 import { useSelector, useDispatch } from 'react-redux';
-import { MoveNextQuestion, MovePrevQuestion } from '../hooks/FetchQuestions';
-import { pushAnswer } from '../hooks/setResult';
 import { Navigate } from 'react-router-dom';
 import { Dispatch } from 'redux';
-import { QuestionAction } from '../redux/question_reducer';
 import { RootState } from '../redux/store';
-import { ResultAction, pushResultAction } from '../redux/result_reducer';
+import { pushResultAction } from '../redux/result/result_reducer';
+import { MoveNextQuestion, MovePrevQuestion } from '../redux/question/handleQuestion';
+import { pushAnswer } from '../redux/result/handleResult';
 
 export default function Quiz() {
     const [check, setChecked] = useState<React.Key | undefined | null>(

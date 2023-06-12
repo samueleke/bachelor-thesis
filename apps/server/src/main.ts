@@ -1,6 +1,7 @@
 /* eslint-disable @nx/enforce-module-boundaries */
 import express, { NextFunction, Request, Response } from 'express';
 import cors from 'cors';
+import morgan from 'morgan';
 import env from './utils/env';
 import mongoose from 'mongoose';
 import { AsyncRouter } from 'express-async-router';
@@ -16,9 +17,12 @@ import { studentRoutes } from './users/student/studentRoute';
 
 const app = express();
 
+app.use(morgan('dev'));
+
 app.use(cors({
   origin: env.CLIENT_URL,
 }))
+
 app.use(express.json());
 
 

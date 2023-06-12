@@ -1,5 +1,5 @@
 {
-    "name": "allamvizsga",
+    "name": "@thesis",
     "version": "0.0.0",
     "license": "MIT",
     "author": "Eke Samuel",
@@ -38,9 +38,8 @@
         "typescript": "~5.0.2"
     },
     "workspaces": [
-        "packages/**/*",
-        "apps/server",
-        "apps/client"
+        "packages/*",
+        "apps/*"
     ],
     "dependencies": {
         "@emotion/react": "^11.11.0",

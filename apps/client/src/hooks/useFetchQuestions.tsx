@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { getServerData } from '../helper/helper';
+import { getServerData } from '../utils/serverData';
 import { Dispatch } from 'redux';
 
-import * as Action from '../redux/question_reducer';
+import * as Action from '../redux/question/question_reducer';
 import {
     FetchQuestionState,
     ServerResponse,
@@ -22,9 +22,7 @@ export const useFetchQuestion = (): [
     });
 
     useEffect(() => {
-        setGetData((prev) => ({ ...prev, isLoading: true }));
-
-        (async () => {
+        const fetchData = async () => {
             try {
                 const response = await getServerData<ServerResponse>(
                     `${import.meta.env.VITE_SERVER_HOSTNAME}/api/questions`,
@@ -59,26 +57,11 @@ export const useFetchQuestion = (): [
                 setGetData((prev) => ({ ...prev, isLoading: false }));
                 setGetData((prev) => ({ ...prev, serverError }));
             }
-        })();
+        };
+
+        setGetData((prev) => ({ ...prev, isLoading: true }));
+        fetchData();
     }, [dispatch]);
 
     return [getData, setGetData];
 };
-
-export const MoveNextQuestion =
-    () => async (dispatch: Dispatch<Action.QuestionAction>) => {
-        try {
-            dispatch(Action.moveNextAction());
-        } catch (error) {
-            console.log(error);
-        }
-    };
-
-export const MovePrevQuestion =
-    () => async (dispatch: Dispatch<Action.QuestionAction>) => {
-        try {
-            dispatch(Action.movePrevAction());
-        } catch (error) {
-            console.log(error);
-        }
-    };

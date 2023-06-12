@@ -15,11 +15,10 @@ const errorStatusCodes = {
 
 export class APIError extends Error {
     errorCode: keyof typeof errorStatusCodes;
-    data?: Record<string, unknown>;
-
+    data?: string
     constructor(
         errorCode: keyof typeof errorStatusCodes,
-        data?: Record<string, unknown>) {
+        data?: string) {
         const message = errorStatusCodes[errorCode];
         super(message);
         this.errorCode = errorCode;
@@ -29,5 +28,5 @@ export class APIError extends Error {
 
 export type APIErrorType = {
     errorCode: typeof errorStatusCodes;
-    data?: Record<string, unknown>;
+    data?: string;
 };

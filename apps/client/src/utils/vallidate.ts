@@ -1,7 +1,7 @@
-import { APIError, APIErrorType } from "shared/errors";
+import { APIErrorType } from "shared/errors";
 
-export const isAPIError = (error: unknown): error is APIError => {
-    return (error as APIError)?.data?.message !== undefined;
+export const isAPIErrorType = (error: any): error is APIErrorType => {
+    return error.data && typeof error.errorCode !== undefined;
 };
 interface GenericErrorType {
     response?: {
@@ -12,10 +12,9 @@ interface GenericErrorType {
 }
 
 export function formatError(error: unknown): Error {
-    const err = error as APIErrorType;
     let apiErrorMessage;
-    if (isAPIError(err)) {
-        apiErrorMessage = JSON.stringify(err.data?.message)
+    if (isAPIErrorType(error)) {
+        apiErrorMessage = JSON.stringify(error.data)
     }
 
     const genericError = error as GenericErrorType;
@@ -23,7 +22,6 @@ export function formatError(error: unknown): Error {
 
     // If apiErrorMessage is defined, use that. If not, use genericErrorMessage
     const errorMessage = JSON.stringify(apiErrorMessage || genericErrorMessage);
-
 
     return new Error(errorMessage);
 }

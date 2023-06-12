@@ -1,4 +1,10 @@
-import React, { ChangeEvent, FormEvent, useState, MouseEvent } from 'react';
+import React, {
+    ChangeEvent,
+    FormEvent,
+    useState,
+    MouseEvent,
+    useEffect,
+} from 'react';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -25,19 +31,20 @@ import VisibilityOff from '@mui/icons-material/VisibilityOff';
 import './Login.css';
 import jwt_decode from 'jwt-decode';
 import { useNavigate } from 'react-router-dom';
-import { useDispatch } from '../../redux/store';
-
-import * as Action from '../../redux/auth_reducer';
-import { signIn } from '../../hooks/setResult';
+import { RootState, useDispatch } from '../../redux/store';
+import * as AuthAction from '../../redux/auth/auth_reducer';
 import { DecodedToken, User } from '../../types';
-import { APIErrorType } from 'shared/errors';
 import { z } from 'zod';
-import { isAPIError } from '../../helper/vallidate';
+import Notification from '../../components/Error/Notification';
+import { useSelector } from 'react-redux';
+import { loginUser } from '../../redux/auth/handleAuth';
 
 export default function Login() {
     const dispatch = useDispatch();
     const history = useNavigate();
     const [showPassword, setShowPassword] = React.useState(false);
+    // const [isError, setIsError] = useState(false);
+    const error = useSelector((state: RootState) => state?.auth.error);
     const handleClickShowPassword = () => setShowPassword((show) => !show);
 
     const handleMouseDownPassword = (event: MouseEvent<HTMLButtonElement>) => {
@@ -54,15 +61,7 @@ export default function Login() {
 
     const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        try {
-            dispatch(signIn(formData, history));
-        } catch (error) {
-            console.error(error);
-            const err = error as APIErrorType;
-            if (isAPIError(error)) {
-                dispatch(Action.setError(err));
-            }
-        }
+        dispatch(loginUser(formData, history));
     };
 
     const responseSchema = z.object({
@@ -88,15 +87,20 @@ export default function Login() {
             image: picture,
         };
         try {
-            dispatch(Action.startAuth(user));
+            dispatch(AuthAction.startAuth(user));
             history('/');
         } catch (error) {
             console.log(error);
         }
     }
 
+    // useEffect(() => {
+    //     if (error)  dispatch(Action.setError(null));
+    // }, [error, dispatch]);
+
     return (
         <div style={{ minHeight: '100vh' }}>
+            {error && <Notification message={error.toString()} />}
             <Container component="main" maxWidth="xs">
                 <CssBaseline />
                 <Box

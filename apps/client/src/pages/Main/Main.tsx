@@ -1,10 +1,10 @@
 import React, { Fragment, useRef, FC } from 'react';
 import { useDispatch } from 'react-redux';
 import { Link, Outlet } from 'react-router-dom';
-import { setUserId } from '../../redux/result_reducer';
+import { setUserId } from '../../redux/result/result_reducer';
 import './Main.css';
 
-import Navbar from '../Navbar/Navbar';
+import Navbar from '../../components/Navbar/Navbar';
 import { Container } from '@mui/material';
 import { Box } from '@mui/system';
 
@@ -18,7 +18,6 @@ const Main: FC = () => {
             dispatch(setUserId(inputRef.current?.value));
         }
     }
-
 
     return (
         <Container maxWidth="xl">

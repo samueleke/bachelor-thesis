@@ -1,9 +1,9 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { User } from '../types';
-import { APIErrorType } from 'shared/errors';
+import { User } from '../../types';
+// import { APIErrorType } from 'shared/errors';
 type AuthState = {
     authData: User | null;
-    error: APIErrorType | null;
+    error: string | null | undefined;
 };
 
 const initialState: AuthState = {
@@ -34,7 +34,7 @@ export const authReducer = createSlice({
                 error: null,
             };
         },
-        setError: (state, action: PayloadAction<string>) => {
+        setError: (state, action: PayloadAction<string | null | undefined>) => {
             return {
                 ...state,
                 error: action.payload,

@@ -1,8 +1,10 @@
 {
-    "name": "shared",
+    "name": "@thesis/shared",
     "version": "1.0.0",
+    "author": "Eke Samuel",
+    "license": "ISC",
     "description": "",
-    "main": "main.ts",
+    "main": "dist/index.js",
     "type": "module",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1"
@@ -16,7 +18,5 @@
     },
     "exports": {
         "./errors": "./errors.ts"
-    },
-    "author": "Eke Samuel",
-    "license": "ISC"
+    }
 }
